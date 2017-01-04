@@ -1,0 +1,7 @@
+R, Student, integer, 80
+I, Student, 50, "abcdefghijklmnnnnnnnnnnnnnnnnnnnnnnnnnnnnn   "
+D, Student, 50
+
+R, News, String, 90
+I, News, "Financial Technology", "news article about finanacial technology from New new Times  "
+D, News, "Financial Technology"

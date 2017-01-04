@@ -1,0 +1,17 @@
+Scan Student
+Scan News
+
+q Student 600
+q News "Internet of Things"
+
+q Student 500 600
+q News "Internat of Things" "Smarter City"
+
+p Student 5
+p News 7
+
+c Student
+c News
+
+x News
+I, Student
