@@ -13,7 +13,7 @@ void parseInputData(const string& filename) {
     string line, cell;
 
     while(getline(infile, line)) {
-    stringstream lineStream(line);
+        stringstream lineStream(line);
         while(getline(lineStream, cell, ',')) {
             cout << cell << endl;
         }
@@ -25,7 +25,7 @@ void parseTestData(const string& filename) {
     string line, cell;
 
     while(getline(infile, line)) {
-    stringstream lineStream(line);
+        stringstream lineStream(line);
         while(getline(lineStream, cell, ' ')) {
             cout << cell << endl;
         }
