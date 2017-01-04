@@ -9,27 +9,27 @@
 using namespace std;
 
 void parseInputData(const string& filename) {
-  ifstream infile(filename);
-  string line, cell;
+    ifstream infile(filename);
+    string line, cell;
 
-  while(getline(infile, line)) {
+    while(getline(infile, line)) {
     stringstream lineStream(line);
-    while(getline(lineStream, cell, ',')) {
-        cout << cell << endl;
+        while(getline(lineStream, cell, ',')) {
+            cout << cell << endl;
+        }
     }
-  }
 }
 
 void parseTestData(const string& filename) {
-  ifstream infile(filename);
-  string line, cell;
+    ifstream infile(filename);
+    string line, cell;
 
-  while(getline(infile, line)) {
+    while(getline(infile, line)) {
     stringstream lineStream(line);
-    while(getline(lineStream, cell, ' ')) {
-        cout << cell << endl;
+        while(getline(lineStream, cell, ' ')) {
+            cout << cell << endl;
+        }
     }
-  }
 }
 
 int main() {
