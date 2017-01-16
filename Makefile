@@ -1,8 +1,19 @@
+CXX=g++
+CXXFLAGS=-std=c++11 -Wall
+
 all: main
+
+run: main
 	./main
 
-main: main.cpp
-	g++ -std=c++11 -o main main.cpp
+main: main.o parser.o commands.o
+	$(CXX) -o main main.o parser.o commands.o $(CXXFLAGS)
 
-run_main: main
-	./main
+main.o: main.cpp parser.h
+	$(CXX) -c main.cpp $(CXXFLAGS)
+
+parser.o: parser.cpp commands.h
+	$(CXX) -c parser.cpp $(CXXFLAGS)
+
+commands.o: commands.cpp
+	$(CXX) -c commands.cpp $(CXXFLAGS)
