@@ -23,6 +23,23 @@ Relation::Relation(string name,string datatype,int reclen){
 	R_datatype = datatype;
 }
 
+
+void Relation::delete(int key){
+ //map當中要刪掉	
+  iter1= key2record.find(key);
+  map2record.erase(iter1);
+  iter2=key2RID.find(key);
+  key2RID.erase(iter2);
+  
+ //更新RIDtable 
+  RIDtable[key]= false;
+	
+
+
+
+}
+
+
 void main()
 {	
 /*
