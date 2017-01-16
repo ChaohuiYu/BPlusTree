@@ -4,7 +4,7 @@
 #include <SlottedPage.h>
 using namespace std;
 
-Relation::Relation(string name,string datatype,int reclen){
+SlottedPage::SlottedPage(string name,string datatype,int reclen){
 
 	//計算slot_num，算法暫定 neglect book keeping
 	
@@ -23,6 +23,14 @@ Relation::Relation(string name,string datatype,int reclen){
 	R_datatype = datatype;
 }
 
+bool SlottedPage::checkFun(){
+	for(iter = RIDtable.begin(); iter != RIDtable.end(); iter++){
+		if(iter->second == false){
+			return false;
+		}
+	}
+	return true;
+}
 
 void Relation::delete(int key){
 	
@@ -47,6 +55,21 @@ if(iter3 == key2record.end()){
 
 }
 
+void SlottedPage::insert(int key, string record){
+    if(下一個要給的是頭){
+        if(checkFun()){
+            RIDtable填入接下來要給的RID
+            填key2record以及key2RID;
+            }
+        else{
+            回頭掃(這裡還要想怎麼填和記錄填到哪一個RID)
+            填key2record以及key2RID;
+        }
+    }
+    else{
+        直接填RIDtable, key2record以及key2RID;
+    }
+}
 
 void main()
 {	
