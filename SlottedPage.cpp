@@ -25,7 +25,17 @@ Relation::Relation(string name,string datatype,int reclen){
 
 
 void Relation::delete(int key){
+	
+// Error handling 
+  iter3 = key2record.find(key);
+if(iter3 == key2record.end()){	
+   cout<<"Do not Find this record"<<endl;
+   return;
+} 
+
+
  //map當中要刪掉	
+	
   iter1= key2record.find(key);
   map2record.erase(iter1);
   iter2=key2RID.find(key);
@@ -33,8 +43,6 @@ void Relation::delete(int key){
   
  //更新RIDtable 
   RIDtable[key]= false;
-	
-
 
 
 }
