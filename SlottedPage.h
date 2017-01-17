@@ -9,9 +9,10 @@ class SlottedPage {
     public:
         SlottedPage(string name, string _keyType, int reclen);
         void insert(int key, string record);   //回傳RID
-        void delete(int key);   //回傳Delelte 那筆record 的RID
-        bool checkFun();  //check RIDtable中前面的值是否都填滿
+        void deleteRecord(int key);   //回傳Delete 那筆record 的RID
+        bool hasDeletedRecord();  //check RIDtable中前面的值是否都填滿
         int getnextRID(int RID);
+        void print();
 
     private:
         const int pageSize = 512;
