@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "Relation.h"
 using namespace std;
 
