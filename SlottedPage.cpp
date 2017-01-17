@@ -23,15 +23,6 @@ SlottedPage::SlottedPage(string name,string datatype,int reclen){
 	R_datatype = datatype;
 }
 
-bool SlottedPage::checkFun(){
-	for(iter = RIDtable.begin(); iter != RIDtable.end(); iter++){
-		if(iter->second == false){
-			return false;
-		}
-	}
-	return true;
-}
-
 void Relation::delete(int key){
 	
 // Error handling 
@@ -55,20 +46,57 @@ if(iter3 == key2record.end()){
 
 }
 
+bool SlottedPage::checkFun(){
+	for(iter = RIDtable.begin(); iter != RIDtable.end(); iter++){
+        if(iter->second == false){
+			return false; //這個for loop會不會漏掉iter == RIDtable.end()，且iter->second == false的狀況？
+		}
+	}
+    if(iter == RIDtable.end() && iter->second == false){
+        return false;
+    }
+	return true;
+}
+
+
+int SlottedPage::getnextRID(int RID){
+    
+}
+
 void SlottedPage::insert(int key, string record){
-    if(下一個要給的是頭){
-        if(checkFun()){
-            RIDtable填入接下來要給的RID
-            填key2record以及key2RID;
+    if(updatedRID % pageID_base != 0 || updatedRID == 0){//要配出去的RID是中間值或0，直接分配
+        key2record.insert(pair<int, string>(key, record));
+        key2RID.insert(pair<int, int>(key, updatedRID));
+		RIDtable.insert(pair<int, bool>(updatedRID , true));
+        updatedRID++;//增加RID時要做處理
+    }
+    else if(updatedRID % pageID_base == 0){//要配出去的RID是page的開頭
+        if(checkFun()){//前面都填滿的狀況
+            key2record.insert(pair<int, string>(key, record));
+            key2RID.insert(pair<int, int>(key, updatedRID));
+            RIDtable.insert(pair<int, bool>(updatedRID , true));
+            updatedRID++;
+        }
+        else{//前面未填滿的狀況
+            if(currentRID==updatedRID){ //已掃完的狀況->再掃
+                currentRID=0;
+                currentRID=getnextRID(currentRID);
+                key2record.insert(pair<int, string>(key, record));
+                key2RID.insert(pair<int, int>(key, currentRID));
+                RIDtable.insert(pair<int, bool>(currentRID , true));
             }
-        else{
-            回頭掃(這裡還要想怎麼填和記錄填到哪一個RID)
-            填key2record以及key2RID;
+            else{//繼續掃完
+                currentRID=getnextRID(currentRID);
+                key2record.insert(pair<int, string>(key, record));
+                key2RID.insert(pair<int, int>(key, currentRID));
+                RIDtable.insert(pair<int, bool>(currentRID , true));
+                if(getnextRID(currentRID)==updatedRID){
+                    currentRID=updatedRID;
+                }
+            }
         }
     }
-    else{
-        直接填RIDtable, key2record以及key2RID;
-    }
+    
 }
 
 void main()
