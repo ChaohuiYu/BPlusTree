@@ -5,9 +5,9 @@ using namespace std;
 /*
 Notes:
 1. the 'T' (key type) is determined outside.
-    so the "keyType" data memnter won't do anything here.
+    so the "keyType" data memter won't do anything here.
 2. BPlusTree handle key -> rid. It should know nothing about record.
-3. SlottedPage handle rid -> record. It should know nothing about key.
+3. SlottedPage handle rid <-> record. It should know nothing about key.
 */
 
 template <class T>
