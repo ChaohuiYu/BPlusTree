@@ -17,3 +17,9 @@ parser.o: parser.cpp commands.h
 
 commands.o: commands.cpp
 	$(CXX) -c commands.cpp $(CXXFLAGS)
+
+run_test_slotted_page: test_slotted_page
+	./test_slotted_page
+
+test_slotted_page:
+	$(CXX) -o test_slotted_page test_slotted_page.cpp SlottedPage.cpp $(CXXFLAGS)
