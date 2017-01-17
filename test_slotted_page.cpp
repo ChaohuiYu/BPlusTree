@@ -24,7 +24,8 @@ int main() {
     // FOR(i, 20, 28) {
     //     sp.insert(i, "d" + to_string(i));
     // }
-    sp.print();
+    // sp.print();
+    cout << sp.getRealRID(3) << endl;
 
     // system("pause");
     return 0;
