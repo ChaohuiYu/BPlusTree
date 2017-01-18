@@ -11,12 +11,14 @@ class SlottedPageStructure {
         void deleteRecord(int rid);
         string queryRecord(int rid);
         void print();
+        void printPage(int pageId);
+        int getPageNum();
 
     private:
         const int _pageSize = 512;
-        const int _pageIdSize = 2;
+        // const int _pageIdSize = 2;
         const int _slotIdSize = 2;
-        const int _ridSize = _pageIdSize + _slotIdSize;
+        // const int _ridSize = _pageIdSize + _slotIdSize;
         const int _pointerSize = 2; // space for free space pointer
         const int _slotNumSize = 2; // space for storing the number of filled slots
         const int _offsetSize = 2; // space for storing the offset of a slot

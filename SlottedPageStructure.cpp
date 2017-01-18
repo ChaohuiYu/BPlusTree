@@ -69,6 +69,29 @@ void SlottedPageStructure::print() {
     }
 }
 
+void SlottedPageStructure::printPage(int pageId) {
+    cout << "records in page " << pageId << ":" << endl;
+    int pageNum = getPageNum();
+    if (pageId >= pageNum) {
+        cout << "    error: page " << pageId << " doesn't exist." << endl;
+        return;
+    }
+    for (int spaceId = pageId * _slotNum; spaceId < (pageId+1) * _slotNum; ++spaceId) {
+        cout << "    slot " << spaceId2slotId(spaceId) << ": ";
+        if (_recordsExist[spaceId]) {
+            cout << "\"" << _records[spaceId] << "\"";
+        }
+        cout << endl;
+    }
+}
+
+int SlottedPageStructure::getPageNum() {
+    // if (_records.empty()) {
+    //     return 1;
+    // }
+    return (_records.size() - 1) / _slotNum + 1;
+}
+
 // Private Functions
 
 int SlottedPageStructure::insertRecordAtEnd(const string& record) {

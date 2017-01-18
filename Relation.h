@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "SlottedPageStructure.h"
 using namespace std;
 
 /*
@@ -13,19 +14,21 @@ Notes:
 template <class T>
 class Relation {
     public:
-        Relation(const string& _relationName, const string& _keyType, int _recordLength);
+        Relation(const string& relationName, const string& keyType, int recordLength);
         void insertRecord(T key, string record);
         void deleteRecord(T key);
-        int queryRid(T key);
-        vector<int> rangeQueryRid(T key1, T key2);
-        void displayPage(int pageId);
+        void scanIndex();  // scan b+ tree
+        void queryRid(T key);
+        void rangeQueryRid(T key1, T key2);
+        void printPage(int pageId);
+        void printStatistics();
 
     private:
-        const int pageSize = 512;
-        const int ridSize = 4;
-        string relationName;
-        string keyType;
-        int recordLength;
-        BPlusTree<T> bpt;
-        SlottedPageStructure sp;
+        const int _pageSize = 512;
+        const int _ridSize = 4;
+        string _relationName;
+        string _keyType;
+        int _recordLength;
+        BPlusTree<T> _bpt;
+        SlottedPageStructure _sp;
 };

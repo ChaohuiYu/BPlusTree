@@ -1,40 +1,64 @@
 #include <iostream>
 #include <string>
+#include "SlottedPageStructure.h"
 #include "Relation.h"
-using namespace std;
+using name_space std;
 
-Relation::Relation(const string& _relationName, const string& _keyType, const int& _recordLength) {
-    relationName = _relationName;
-    keyType = _keyType;
-    recordLength = _recordLength;
+Relation::Relation(const string& relationName, const string& keyType, const int& recordLength) {
+    _relationName = relationName;
+    _keyType = keyType;
+    _recordLength = recordLength;
 
-    bpt = BPlusTree<T>(pageSize, ridSize);
-    sp = SlottedPageStructure(pageSize, ridSize);
+    _bpt = BPlusTree<T>(pageSize, ridSize);
+    _sp = SlottedPageStructure(pageSize, ridSize);
 }
 
 void Relation::insertRecord(T key, string record) {
-    int rid = sp.insertRecord(record);
-    bpt.insertRid(key, rid);
+    int rid = _sp.insertRecord(record);
+    _bpt.insertRid(key, rid);
 }
 
 void Relation::deleteRecord(T key) {
-    int rid = bpt.queryRid(key);
-    sp.deleteRecord(rid);
-    bpt.deleteKeyAndRid(key);
+    int rid = _bpt.queryRid(key);
+    _sp.deleteRecord(rid);
+    _bpt.deleteKeyAndRid(key);
+}
+
+void Relation::scanIndex() {
+    // Output (# of leaf pages, # of total index pages)
+    cout << "# of leaf pages: " << _bpt.getLeafPageNum() << endl;
+    cout << "# of total index pages: " << _bpt.getPageNum() << endl;
 }
 
 // string Relation::queryRecord(T key) {
-//     int rid = bpt.queryRid(key);
-//     string record = sp.queryRecord(rid)
+//     int rid = _bpt.queryRid(key);
+//     string record = _sp.queryRecord(rid)
 //     return record;
 // }
 
-int queryRid(T key) {
-    int rid = bpt.queryRid(key);
-    return rid;
+void Relation::queryRid(T key) {
+    // Output (Key, size of rest of the record, RID)
+    int rid = _bpt.queryRid(key);
+    cout << "key: " << key << ", ";
+    cout << "RID: " << rid << endl;
 }
 
-vector<int> rangeQueryRid(T key1, T key2) {
-    vector<int> ridList = bpt.rangeQueryRid(key1, key2);
-    return ridList;
+void Relation::rangeQueryRid(T key1, T key2) {
+    vector<int> ridList = _bpt.rangeQueryRid(key1, key2);
+    if (ridList.empty()) {
+        cout << "No key in this range.\n";
+    }
+    cout << "RID list:" << endl;
+    for (auto rid : ridList) {
+        cout << "  " << rid << endl;
+    }
+}
+
+void Relation::printPage(int pageId) {
+    _sp.printPage(pageId);
+}
+
+void Relation::printStatistics() {
+    cout << "# of index pages: " << _bpt.getPageNum() << endl;
+    cout << "# of slotted data pages: " << _sp.getPageNum() << endl;
 }
