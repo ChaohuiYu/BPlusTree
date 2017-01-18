@@ -24,3 +24,22 @@ run_test_slotted_page: test_slotted_page
 
 test_slotted_page: test_slotted_page.cpp SlottedPageStructure.cpp
 	$(CXX) -o test_slotted_page test_slotted_page.cpp SlottedPageStructure.cpp $(CXXFLAGS)
+
+run_test_bptSim: test_bptSim
+	./test_bptSim
+
+test_bptSim: test_bptSim.cpp BPlusTreeSimulator.cpp
+	$(CXX) -o test_bptSim test_bptSim.cpp BPlusTreeSimulator.cpp $(CXXFLAGS)
+
+test_relation: test_relation.cpp Relation.o SlottedPageStructure.o BPlusTreeSimulator.o
+	$(CXX) -o test_relation test_relation.cpp Relation.o SlottedPageStructure.o BPlusTreeSimulator.o $(CXXFLAGS)
+	./test_relation
+
+Relation.o: Relation.cpp
+	$(CXX) -c Relation.cpp $(CXXFLAGS)
+
+SlottedPageStructure.o: SlottedPageStructure.cpp
+	$(CXX) -c SlottedPageStructure.cpp $(CXXFLAGS)
+
+BPlusTreeSimulator.o: BPlusTreeSimulator.cpp
+	$(CXX) -c BPlusTreeSimulator.cpp $(CXXFLAGS)

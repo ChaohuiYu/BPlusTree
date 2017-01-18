@@ -4,6 +4,9 @@
 #include <vector>
 using namespace std;
 
+#ifndef SLOTTED_PAGE_STRUCTURE_H
+#define SLOTTED_PAGE_STRUCTURE_H
+
 class SlottedPageStructure {
     public:
         SlottedPageStructure(int recordLength);
@@ -42,3 +45,5 @@ class SlottedPageStructure {
         bool isCurrentPageFull();
         bool hasFreeSpaceInMiddle();
 };
+
+#endif
