@@ -25,5 +25,5 @@ class Relation {
         string keyType;
         int recordLength;
         BPlusTree<T> bpt;
-        SlottedPage sp;
+        SlottedPageStructure sp;
 };

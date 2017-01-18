@@ -9,7 +9,7 @@ Relation::Relation(const string& _relationName, const string& _keyType, const in
     recordLength = _recordLength;
 
     bpt = BPlusTree<T>(pageSize, ridSize);
-    sp = SlottedPage(pageSize, ridSize);
+    sp = SlottedPageStructure(pageSize, ridSize);
 }
 
 void Relation::insertRecord(T key, string record) {

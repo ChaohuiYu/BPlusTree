@@ -22,5 +22,5 @@ commands.o: commands.cpp
 run_test_slotted_page: test_slotted_page
 	./test_slotted_page
 
-test_slotted_page: test_slotted_page.cpp SlottedPage.cpp
-	$(CXX) -o test_slotted_page test_slotted_page.cpp SlottedPage.cpp $(CXXFLAGS)
+test_slotted_page: test_slotted_page.cpp SlottedPageStructure.cpp
+	$(CXX) -o test_slotted_page test_slotted_page.cpp SlottedPageStructure.cpp $(CXXFLAGS)
