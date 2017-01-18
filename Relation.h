@@ -16,7 +16,9 @@ class Relation {
         Relation(const string& _relationName, const string& _keyType, int _recordLength);
         void insertRecord(T key, string record);
         void deleteRecord(T key);
-        string queryRecord(T key);
+        int queryRid(T key);
+        vector<int> rangeQueryRid(T key1, T key2);
+        void displayPage(int pageId);
 
     private:
         const int pageSize = 512;

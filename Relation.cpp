@@ -18,11 +18,23 @@ void Relation::insertRecord(T key, string record) {
 }
 
 void Relation::deleteRecord(T key) {
-    bpt.queryRid(key);
+    int rid = bpt.queryRid(key);
     sp.deleteRecord(rid);
+    bpt.deleteKeyAndRid(key);
 }
 
-string Relation::queryRecord(T key) {
+// string Relation::queryRecord(T key) {
+//     int rid = bpt.queryRid(key);
+//     string record = sp.queryRecord(rid)
+//     return record;
+// }
+
+int queryRid(T key) {
     int rid = bpt.queryRid(key);
-    return sp.queryRecord(rid);
+    return rid;
+}
+
+vector<int> rangeQueryRid(T key1, T key2) {
+    vector<int> ridList = bpt.rangeQueryRid(key1, key2);
+    return ridList;
 }
