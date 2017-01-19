@@ -12,6 +12,9 @@ using namespace std;
 // R, Movie, String, 100
 void createRelation(const string& relationName, const string& keyType, const int& recordLength) {
     // need to check if keyType is "integer" or "String"
+    if (keyType == "integer" || keyType == "Integer" || keyType == "int") {
+        
+    }
 }
 
 // I, Chat, 416, "Hello world!"

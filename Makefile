@@ -43,3 +43,13 @@ SlottedPageStructure.o: SlottedPageStructure.cpp
 
 BPlusTreeSimulator.o: BPlusTreeSimulator.cpp
 	$(CXX) -c BPlusTreeSimulator.cpp $(CXXFLAGS)
+
+BPlusTreeInt.o: BPlusTreeInt.cpp
+	$(CXX) -c BPlusTreeInt.cpp $(CXXFLAGS)
+
+BPlusTreeRoger.o: BPlusTreeRoger.cpp
+	$(CXX) -c BPlusTreeRoger.cpp $(CXXFLAGS)
+
+test_bptRoger: test_bptRoger.cpp BPlusTreeRoger.o
+	$(CXX) -o test_bptRoger test_bptRoger.cpp BPlusTreeRoger.o $(CXXFLAGS)
+	./test_bptRoger
