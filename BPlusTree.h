@@ -12,7 +12,7 @@ class BPlusTree {
         bool deleteValue(T key);
         int queryValue(T key);
         void printTree();
-        // vector<int> rangeQueryValue(T key1, T key2);
+        vector<int> rangeQueryValue(T key1, T key2);
         // int getLeafPageNum();
         // int getNonLeafPageNum();
         // int getPageNum();

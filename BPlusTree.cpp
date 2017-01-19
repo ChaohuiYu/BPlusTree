@@ -66,6 +66,45 @@ int BPT<T>::queryValue(T key) {
     return -1;
 }
 
+template <class T>
+vector<int> BPT<T>::rangeQueryValue(T key1, T key2) {
+    BPT_NODE* node;
+    vector<BPT_NODE*> nodeStack {_root};
+    vector<int> queryValues;
+
+    while(!nodeStack.empty()) {
+        node = nodeStack.back();
+        nodeStack.pop_back();
+
+        if (node == NULL) {
+            continue;
+        }
+
+        if (!node->_isLeaf) {
+            if (key2 >= node->_keys[node->_keyCount - 1]) {
+                nodeStack.push_back((BPT_NODE*)node->_pointers[node->_keyCount]);
+            }
+            for (int i = node->_keyCount - 1; i > 0; i--) {
+                if (key1 <= node->_keys[i] || key2 >= node->_keys[i-1]) {
+                    nodeStack.push_back((BPT_NODE*)node->_pointers[i]);
+                }
+            }
+            if (key1 <= node->_keys[0]) {
+                nodeStack.push_back((BPT_NODE*)node->_pointers[0]);
+            }
+        }
+        else {
+            FOR(i, 0, node->_keyCount) {
+                if (node->_keys[i] >= key1 && node->_keys[i] <= key2) {
+                    queryValues.push_back((int)(long long)node->_pointers[i+1]);
+                }
+            }
+        }
+    }
+    return queryValues;
+}
+
+
 // private functions
 
 template <class T>
@@ -84,7 +123,7 @@ typename BPT_NODE* BPT<T>::findLeaf(T key) {
 
 template <class T>
 void BPT<T>::insertInNode(BPT_NODE* node, T key, void* value) {
-    cout << "node: " << node << ", key: " << key << ", value: " << value << endl;
+    // cout << "node: " << node << ", key: " << key << ", value: " << value << endl;
     // find position to insert
     int insertIdx = 0;
     while (insertIdx < node->_keyCount && node->_keys[insertIdx] < key) insertIdx++;
