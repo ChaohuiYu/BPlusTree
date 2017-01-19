@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <algorithm>
 #include "SlottedPageStructure.h"
 using namespace std;
 

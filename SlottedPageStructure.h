@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 #ifndef SLOTTED_PAGE_STRUCTURE_H
