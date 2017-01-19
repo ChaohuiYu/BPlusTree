@@ -1,5 +1,5 @@
 #include <string>
-#include "BPlusTreeRoger.h"
+#include "BPlusTree.h"
 
 #define FOR(i,a,b) for(int i=(a);i<(b);i++)
 
@@ -9,7 +9,7 @@ int main() {
     // bpt.insertRid(4, 65537);
     // bpt.print();
 
-    auto bpt = BPlusTreeRoger<int>();
+    auto bpt = BPlusTree<int>();
 
     bpt.insertValue(1, 1);
     bpt.insertValue(2, 2);
@@ -44,7 +44,7 @@ int main() {
 
     //
     //
-    // auto bpt2 = BPlusTreeRoger<string>();
+    // auto bpt2 = BPlusTree<string>();
     //
     // bpt2.insertValue("dsifuhj", 3);
     // bpt2.insertValue("34uhijkr", 4);

@@ -47,9 +47,9 @@ BPlusTreeSimulator.o: BPlusTreeSimulator.cpp
 BPlusTreeInt.o: BPlusTreeInt.cpp
 	$(CXX) -c BPlusTreeInt.cpp $(CXXFLAGS)
 
-BPlusTreeRoger.o: BPlusTreeRoger.cpp
-	$(CXX) -c BPlusTreeRoger.cpp $(CXXFLAGS)
+BPlusTree.o: BPlusTree.cpp
+	$(CXX) -c BPlusTree.cpp $(CXXFLAGS)
 
-test_bptRoger: test_bptRoger.cpp BPlusTreeRoger.o
-	$(CXX) -o test_bptRoger test_bptRoger.cpp BPlusTreeRoger.o $(CXXFLAGS)
-	./test_bptRoger
+test_bpt: test_bpt.cpp BPlusTree.o
+	$(CXX) -o test_bpt test_bpt.cpp BPlusTree.o $(CXXFLAGS)
+	./test_bpt

@@ -2,11 +2,11 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include "BPlusTreeRoger.h"
+#include "BPlusTree.h"
 using namespace std;
 
-#define BPT BPlusTreeRoger
-#define BPT_NODE BPlusTreeRoger<T>::BPlusTreeNode
+#define BPT BPlusTree
+#define BPT_NODE BPlusTree<T>::BPlusTreeNode
 #define FOR(i,a,b) for(int i=(a);i<(b);i++)
 
 // public functions
@@ -232,5 +232,5 @@ void BPT_NODE::printNode() {
     }
 }
 
-template class BPlusTreeRoger<int>;
-template class BPlusTreeRoger<string>;
+template class BPlusTree<int>;
+template class BPlusTree<string>;
