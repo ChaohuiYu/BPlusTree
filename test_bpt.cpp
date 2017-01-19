@@ -10,37 +10,45 @@ int main() {
     // bpt.print();
 
     auto bpt = BPlusTree<int>();
+    //
+    // bpt.insertValue(9487, 9487);
+    // bpt.insertValue(237, 237);
+    // bpt.insertValue(34, 34);
+    // bpt.insertValue(454, 454);
+    // bpt.insertValue(23, 23);
+    // bpt.insertValue(5, 5);
+    // bpt.insertValue(87, 87);
+    // bpt.insertValue(987, 987);
+    // bpt.insertValue(13, 10);
+    // bpt.insertValue(12, 10);
+    // bpt.insertValue(11, 10);
+    // bpt.insertValue(10, 10);
+    // bpt.insertValue(9, 9);
+    // bpt.insertValue(8, 8);
+    // bpt.insertValue(7, 7);
+    // bpt.insertValue(6, 6);
+    // bpt.insertValue(4, 4);
+    // bpt.insertValue(2, 2);
+    // bpt.insertValue(1, 1);
+    // bpt.insertValue(-1, -1);
 
-    bpt.insertValue(1, 1);
-    bpt.insertValue(2, 2);
-    bpt.insertValue(4, 4);
-    bpt.insertValue(237, 237);
-    bpt.insertValue(34, 34);
-    bpt.insertValue(454, 454);
-    bpt.insertValue(23, 23);
-    bpt.insertValue(5, 5);
-    bpt.insertValue(87, 87);
-    bpt.insertValue(987, 987);
-    bpt.insertValue(9487, 9487);
-    bpt.insertValue(13, 10);
-    bpt.insertValue(12, 10);
-    bpt.insertValue(11, 10);
-    bpt.insertValue(10, 10);
-    bpt.insertValue(-1, -1);
+    FOR(i, 0, 120) {
+        bpt.insertValue(i, i);
+    }
 
-    cout << "query 237:" << bpt.queryValue(237) << endl;
-    cout << "query 9487:" << bpt.queryValue(9487) << endl;
+    // cout << "query 237:" << bpt.queryValue(237) << endl;
+    // cout << "query 9487:" << bpt.queryValue(9487) << endl;
 
     bpt.printTree();
 
-    bpt.deleteValue(10);
-    bpt.deleteValue(1);
-    bpt.deleteValue(2);
-    bpt.deleteValue(4);
-    bpt.deleteValue(12);
-    bpt.deleteValue(9487);
+    // bpt.deleteValue(10);
+    // bpt.deleteValue(1);
+    // bpt.deleteValue(2);
+    // bpt.deleteValue(4);
+    // bpt.deleteValue(12);
+    // bpt.deleteValue(9487);
 
-    bpt.printTree();
+    // bpt.printTree();
 
     //
     //

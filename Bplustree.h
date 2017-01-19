@@ -28,7 +28,8 @@ class BPlusTree {
                 T* _keys;
                 void** _pointers;
                 void* _father;
-            private:
+                void* _prev;
+                void* _next;
         };
     private:
         BPlusTreeNode* _root;

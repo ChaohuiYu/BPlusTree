@@ -84,6 +84,7 @@ typename BPT_NODE* BPT<T>::findLeaf(T key) {
 
 template <class T>
 void BPT<T>::insertInNode(BPT_NODE* node, T key, void* value) {
+    cout << "node: " << node << ", key: " << key << ", value: " << value << endl;
     // find position to insert
     int insertIdx = 0;
     while (insertIdx < node->_keyCount && node->_keys[insertIdx] < key) insertIdx++;
@@ -99,8 +100,10 @@ void BPT<T>::insertInNode(BPT_NODE* node, T key, void* value) {
     node->_pointers[insertIdx + 1] = value;
     node->_keyCount++;
 
-    if (node->_keyCount == _maxKeyCount) // need to split
+    // check if this node need to split
+    if (node->_keyCount == node->_maxKeyCount) {
         splitNode(node);
+    }
 }
 
 template <class T>
@@ -127,18 +130,23 @@ void BPT<T>::splitNode(BPT_NODE* node) {
 
     newNode->_keyCount = _maxKeyCount - midIdx;
     FOR(i, 0, newNode->_keyCount) {
-        newNode->_keys[i] = node->_keys[ i + midIdx ];
-        newNode->_pointers[i] = node->_pointers[ i + midIdx ];
+        newNode->_keys[i] = node->_keys[i + midIdx];
+        newNode->_pointers[i+1] = node->_pointers[i + 1 + midIdx];
     }
-    newNode->_pointers[ newNode->_keyCount ] = node->_pointers[ node->_keyCount ];
+    // newNode->_pointers[ newNode->_keyCount ] = node->_pointers[ node->_keyCount ];
     node->_keyCount = midIdx;
 
     if (node->_isLeaf) {
-        // node->_keyCount++;
-        // newNode->_pointers[0] = node->_pointers[0];
-        // node->_pointers[0] = newNode;
         newNode->_isLeaf = true;
-        // midKey = node->_keys[ _maxKeyCount / 2 + 1 ] ;
+    }
+
+    // update child's father
+    if (!node->_isLeaf) {
+        FOR(i, 0, newNode->_keyCount + 1) {
+            if (newNode->_pointers[i] != NULL) {
+                ((BPT_NODE *)newNode->_pointers[i])->_father = (void *)newNode;
+            }
+        }
     }
 
     if (node->_isRoot) {
@@ -156,11 +164,12 @@ void BPT<T>::splitNode(BPT_NODE* node) {
 
         node->_father = _root;
         newNode->_father = _root;
-    }
-    else {
-        newNode->_father = node->_father;
+    } else {
         insertInNode( (BPT_NODE *)node->_father, midKey, (void *)newNode ) ;
+        newNode->_father = node->_father;
     }
+
+
 
     // cout << "after split: _root, node, newNode\n";
     // _root->printNode();
@@ -213,6 +222,8 @@ BPT_NODE::BPlusTreeNode(bool isLeaf, bool isRoot, int maxKeyCount) {
     _pointers = new void*[_maxKeyCount+1];
     _pointers[0] = NULL;
     _father = NULL;
+    _prev = NULL;
+    _next = NULL;
 }
 
 template <class T>
