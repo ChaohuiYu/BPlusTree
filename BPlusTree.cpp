@@ -104,6 +104,20 @@ vector<int> BPT<T>::rangeQueryValue(T key1, T key2) {
     return queryValues;
 }
 
+template <class T>
+int BPT<T>::getPageNum() {
+    return _nodeCount;
+}
+
+template <class T>
+int BPT<T>::getLeafPageNum() {
+    return _leafCount;
+}
+
+template <class T>
+int BPT<T>::getNonLeafPageNum() {
+    return _nodeCount - _leafCount;
+}
 
 // private functions
 
@@ -183,6 +197,7 @@ void BPT<T>::splitNode(BPT_NODE* node) {
 
     if (node->_isLeaf) {
         newNode->_isLeaf = true;
+        _leafCount++;
     }
 
     // update child's father
@@ -229,7 +244,9 @@ void BPT<T>::redistributeNode(BPT_NODE* node) {
     // BPT_NODE* node;
     vector<BPT_NODE*> nodes {_root};
     vector<T> keys;
+    vector<T> keys2;
     vector<int> values;
+    vector<int> values2;
     int i = 0;
 
     while (i < nodes.size()) {
@@ -237,8 +254,14 @@ void BPT<T>::redistributeNode(BPT_NODE* node) {
         if (node != NULL) {
             if (node->_isLeaf) {
                 FOR(i, 0, node->_keyCount) {
-                    keys.push_back(node->_keys[i]);
-                    values.push_back((int)(long long)node->_pointers[i+1]);
+                    if (i < _maxKeyCount / 2) {
+                        keys.push_back(node->_keys[i]);
+                        values.push_back((int)(long long)node->_pointers[i+1]);
+                    }
+                    else {
+                        keys2.push_back(node->_keys[i]);
+                        values2.push_back((int)(long long)node->_pointers[i+1]);
+                    }
                 }
             }
             else {
@@ -265,6 +288,9 @@ void BPT<T>::redistributeNode(BPT_NODE* node) {
 
     for (int i = 0; i < keys.size(); i++) {
         insertValue(keys[i], values[i]);
+    }
+    for (int i = 0; i < keys2.size(); i++) {
+        insertValue(keys2[i], values2[i]);
     }
 }
 

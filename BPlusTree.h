@@ -13,9 +13,9 @@ class BPlusTree {
         int queryValue(T key);
         void printTree();
         vector<int> rangeQueryValue(T key1, T key2);
-        // int getLeafPageNum();
-        // int getNonLeafPageNum();
-        // int getPageNum();
+        int getPageNum();
+        int getLeafPageNum();
+        int getNonLeafPageNum();
     private:
         class BPlusTreeNode {
             public:
