@@ -36,15 +36,28 @@ int main() {
         bpt.insertValue(2*i, 2*i);
     }
 
-    for (auto& i : bpt.rangeQueryValue(-1, 100)) {
-        cout << i << ' ';
+    bpt.printTree();
+
+    FOR(i, 0, 100) {
+        bpt.deleteValue(2*i);
     }
-    cout << endl;
+
+    bpt.printTree();
+
+    FOR(i, 0, 10) {
+        bpt.insertValue(2*i, 2*i);
+    }
+
+    bpt.printTree();
+
+    // for (auto& i : bpt.rangeQueryValue(-1, 100)) {
+    //     cout << i << ' ';
+    // }
+    // cout << endl;
 
     // cout << "query 237:" << bpt.queryValue(237) << endl;
     // cout << "query 9487:" << bpt.queryValue(9487) << endl;
 
-    // bpt.printTree();
 
     // bpt.deleteValue(10);
     // bpt.deleteValue(1);

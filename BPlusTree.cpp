@@ -154,6 +154,12 @@ void BPT<T>::deleteInNode(BPT_NODE* node, T key) {
     for (int i = deleteIdx + 1; i < node->_keyCount; i++)
         node->_pointers[i] = node->_pointers[i+1];
     node->_keyCount--;
+
+    // if the number of elements in a node < _maxKeyCount/2
+    // redistribute the keys and values in siblings
+    if (node->_keyCount < (_maxKeyCount+1)/2) {
+        redistributeNode(node);
+    }
 }
 
 template <class T>
@@ -207,15 +213,59 @@ void BPT<T>::splitNode(BPT_NODE* node) {
         insertInNode( (BPT_NODE *)node->_father, midKey, (void *)newNode ) ;
         newNode->_father = node->_father;
     }
-
-
-
     // cout << "after split: _root, node, newNode\n";
     // _root->printNode();
     // node->printNode();
     // newNode->printNode();
     // cout << "node == _root->_pointers[0] : " << (node == _root->_pointers[0]) << endl;
     // cout << "newNode == _root->_pointers[1] : " << (newNode == _root->_pointers[1]) << endl;
+}
+
+template <class T>
+void BPT<T>::redistributeNode(BPT_NODE* node) {
+    // if the number of elements in a node < _maxKeyCount/2
+    // redistribute the keys and values in siblings
+
+    // BPT_NODE* node;
+    vector<BPT_NODE*> nodes {_root};
+    vector<T> keys;
+    vector<int> values;
+    int i = 0;
+
+    while (i < nodes.size()) {
+        node = nodes[i];
+        if (node != NULL) {
+            if (node->_isLeaf) {
+                FOR(i, 0, node->_keyCount) {
+                    keys.push_back(node->_keys[i]);
+                    values.push_back((int)(long long)node->_pointers[i+1]);
+                }
+            }
+            else {
+                FOR(i, 0, node->_keyCount + 1) {
+                    nodes.push_back((BPT_NODE*)node->_pointers[i]);
+                }
+            }
+        }
+
+        i++;
+    }
+
+    // for (int i = 0; i < keys.size(); i++) {
+    //     cout << "key: " << keys[i] << ", value: " << values[i] << endl;
+    // }
+
+    for (auto& node : nodes) {
+        delete node;
+    }
+
+    _root = new BPT_NODE(true, true, _maxKeyCount);
+    _nodeCount = 1;
+    _leafCount = 1;
+
+    for (int i = 0; i < keys.size(); i++) {
+        insertValue(keys[i], values[i]);
+    }
 }
 
 template <class T>

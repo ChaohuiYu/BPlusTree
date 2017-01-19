@@ -41,4 +41,5 @@ class BPlusTree {
         void insertInNode(BPlusTreeNode* node, T key, void* value);
         void splitNode(BPlusTreeNode* node);
         void deleteInNode(BPlusTreeNode* node, T key);
+        void redistributeNode(BPlusTreeNode* node);
 };
