@@ -4,10 +4,14 @@
 #include <algorithm>
 using namespace std;
 
+#ifndef B_PLUE_TREE_H
+#define B_PLUE_TREE_H
+
 template <class T>
 class BPlusTree {
     public:
-        BPlusTree();
+        BPlusTree(int maxKeyCount);
+        bool checkKeyExist(T key);
         bool insertValue(T key, int value);
         bool deleteValue(T key);
         int queryValue(T key);
@@ -43,3 +47,5 @@ class BPlusTree {
         void deleteInNode(BPlusTreeNode* node, T key);
         void redistributeNode(BPlusTreeNode* node);
 };
+
+#endif

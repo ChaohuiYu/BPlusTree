@@ -12,7 +12,7 @@ int main() {
     // bpt.insertRid(4, 65537);
     // bpt.print();
 
-    auto bpt = BPlusTree<int>();
+    auto bpt = BPlusTree<int>(62);
     vector<int> toInsert {34,567,23,56,645,3,452,245,563,56,542,2987,23489,35489,328};
 
     for (auto& i : toInsert) {

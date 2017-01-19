@@ -6,8 +6,8 @@ all: main
 run: main
 	./main
 
-main: main.o parser.o commands.o
-	$(CXX) -o main main.o parser.o commands.o $(CXXFLAGS)
+main: main.o parser.o commands.o Relation.o SlottedPageStructure.o BPlusTree.o
+	$(CXX) -o main main.o parser.o commands.o Relation.o SlottedPageStructure.o BPlusTree.o $(CXXFLAGS)
 
 main.o: main.cpp parser.h
 	$(CXX) -c main.cpp $(CXXFLAGS)
@@ -31,8 +31,8 @@ run_test_bptSim: test_bptSim
 test_bptSim: test_bptSim.cpp BPlusTreeSimulator.cpp
 	$(CXX) -o test_bptSim test_bptSim.cpp BPlusTreeSimulator.cpp $(CXXFLAGS)
 
-test_relation: test_relation.cpp Relation.o SlottedPageStructure.o BPlusTreeSimulator.o
-	$(CXX) -o test_relation test_relation.cpp Relation.o SlottedPageStructure.o BPlusTreeSimulator.o $(CXXFLAGS)
+test_relation: test_relation.cpp Relation.o SlottedPageStructure.o BPlusTree.o
+	$(CXX) -o test_relation test_relation.cpp Relation.o SlottedPageStructure.o BPlusTree.o $(CXXFLAGS)
 	./test_relation
 
 Relation.o: Relation.cpp

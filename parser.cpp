@@ -38,7 +38,7 @@ void parseCommands(const std::string& filename) {
 
         // parse the first token as action
         if (!getline(lineStream, command, ' ')) {
-            D(cerr << "invalid command: empty\n");
+            // D(cerr << "invalid command: empty\n");
             continue;
         }
 
@@ -46,7 +46,9 @@ void parseCommands(const std::string& filename) {
         if (command == "R,") {
             commandVector = splitStr(line, ", ");
             if (commandVector.size() != 4) {
-                D(cerr << "invalid command: " << "commandVector.size() != 4 in: " << line << endl);
+                cout << "Error: invalid command: " << line << endl;
+                cout << "    R command example: R, Chat, integer, 90\n";
+                cout << "    R command example: R, Movie, String, 100\n";
                 continue;
             }
 
@@ -54,7 +56,8 @@ void parseCommands(const std::string& filename) {
                 recordLength = std::stoi(commandVector[3]);
             }
             catch (const std::exception& e) {
-                D(cerr << "invalid command: " << "recordLength not integer in: " << line << endl);
+                cout << "Error: invalid command: " << line << endl;
+                cout << "    record length should be an integer\n";
                 continue;
             }
             relationName = commandVector[1];
@@ -66,14 +69,16 @@ void parseCommands(const std::string& filename) {
             commandVectorSections = splitStr(line, "; ");
 
             if (commandVectorSections.size() == 0) {
-                D(cerr << "invalid command: commandVectorSections.size() == 0 in: " << line << endl);
+                cout << "Error: invalid command: " << line << endl;
+                cout << "    I command example: I, Movie, \"nkpgrtxphreddb\", \"xnrmnw osiy\"\n";
                 continue;
             }
 
             // handle the first command
             commandVector = splitStr(commandVectorSections[0], ", ");
             if (commandVector.size() != 4) {
-                D(cerr << "invalid command: commandVector.size() != 4 in: " << line << endl);
+                cout << "Error: invalid command: " << line << endl;
+                cout << "    I command example: I, Movie, \"nkpgrtxphred\", \"xnrmnw osiy\"\n";
                 continue;
             }
             relationName = commandVector[1];
@@ -86,7 +91,9 @@ void parseCommands(const std::string& filename) {
             for (size_t i = 1; i < commandVectorSections.size(); i++) {
                 commandVector = splitStr(commandVectorSections[i], ", ");
                 if (commandVector.size() != 2) {
-                    D(cerr << "invalid command: commandVector.size() != 2 in: " << line << endl);
+                    cout << "Error: invalid command: " << line << endl;
+                    cout << "    I command example: I, Movie, \"nkpgrtxphred\", \"xnrmnw osiy\"; \"nsildfwefoi\", \"dsdisf sdif3fwe9\"\n";
+                    // cout << "Error: invalid command: commandVector.size() != 2 in: " << line << endl;
                     continue;
                 }
                 index = commandVector[0];

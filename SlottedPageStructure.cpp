@@ -70,7 +70,7 @@ void SlottedPageStructure::print() {
 }
 
 void SlottedPageStructure::printPage(int pageId) {
-    cout << "records in page " << pageId << ":" << endl;
+    cout << "Records in page " << pageId << ":" << endl;
     int pageNum = getPageNum();
     if (pageId >= pageNum) {
         cout << "    error: page " << pageId << " doesn't exist." << endl;
@@ -79,7 +79,7 @@ void SlottedPageStructure::printPage(int pageId) {
     for (int spaceId = pageId * _slotNum; spaceId < (pageId+1) * _slotNum; ++spaceId) {
         cout << "    slot " << spaceId2slotId(spaceId) << ": ";
         if (_recordsExist[spaceId]) {
-            cout << "\"" << _records[spaceId] << "\"";
+            cout << _records[spaceId];
         }
         cout << endl;
     }

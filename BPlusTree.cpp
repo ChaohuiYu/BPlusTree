@@ -12,11 +12,23 @@ using namespace std;
 // public functions
 
 template <class T>
-BPT<T>::BPT() {
-    _maxKeyCount = 4;
+BPT<T>::BPT(int maxKeyCount) {
+    _maxKeyCount = maxKeyCount;
     _root = new BPT_NODE(true, true, _maxKeyCount);
     _nodeCount = 1;
     _leafCount = 1;
+}
+
+template <class T>
+bool BPT<T>::checkKeyExist(T key) {
+    BPT_NODE* leaf = findLeaf(key);
+
+    // if key in leaf->_keys, don't insert
+    FOR(i, 0, leaf->_keyCount)
+        if (key == leaf->_keys[i])
+            return true;
+
+    return false;
 }
 
 template <class T>
@@ -47,7 +59,7 @@ bool BPT<T>::deleteValue(T key) {
     }
 
     // if key doesn't exist
-    cout << "error: key " << key << " doesn't exist.\n";
+    // cout << "error: key " << key << " doesn't exist.\n";
     return false;
 }
 
@@ -62,7 +74,7 @@ int BPT<T>::queryValue(T key) {
             return (int)(long long)(leaf->_pointers[i+1]);
 
     // if key doesn't exist
-    cout << "error: key " << key << " doesn't exist.\n";
+    // cout << "    error: key " << key << " doesn't exist.\n";
     return -1;
 }
 

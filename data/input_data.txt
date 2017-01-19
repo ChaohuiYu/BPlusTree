@@ -1,2 +1,1 @@
-R, 30
 R, Chat, integer, 90

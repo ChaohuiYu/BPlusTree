@@ -1,4 +1,4 @@
-void createRelation(const std::string& relationName, const std::string& keyType, const int& recordLength);
+void createRelation(const std::string& relationName, const std::string& keyType, int recordLength);
 void insertRecord(const std::string& relationName, const std::string& key, const std::string& record);
 void deleteRecord(const std::string& relationName, const std::string& key);
 void scanRelation(const std::string& relationName);
@@ -6,3 +6,7 @@ void queryRecord(const std::string& relationName, const std::string& key);
 void rangeQueryRecords(const std::string& relationName, const std::string& key1, const std::string& key2);
 void displayPage(const std::string& relationName, const std::string& pageId);
 void statisticsRelation(const std::string& relationName);
+bool isRelationExist(const std::string& relationName);
+bool isRelationInRelationInt(const std::string& relationName);
+bool isRelationInRelationStr(const std::string& relationName);
+bool is_number(const std::string& s);
