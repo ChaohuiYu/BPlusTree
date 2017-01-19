@@ -104,7 +104,8 @@ void parseCommands(const std::string& filename) {
         else if (command == "D,") {
             commandVector = splitStr(line, ", ");
             if (commandVector.size() != 3) {
-                D(cerr << "invalid command: commandVector.size() != 3 in: " << line << endl);
+                cout << "Error: invalid command: " << line << endl;
+                cout << "    D command example: D, Chat, 282\n";
                 continue;
             }
 
@@ -115,7 +116,8 @@ void parseCommands(const std::string& filename) {
         else if (command == "Scan") {
             commandVector = splitStr(line, " ");
             if (commandVector.size() != 2) {
-                D(cerr << "invalid command: commandVector.size() != 2 in: " << line << endl);
+                cout << "Error: invalid command: " << line << endl;
+                cout << "    Scan command example: Scan Chat\n";
                 continue;
             }
 
@@ -125,7 +127,9 @@ void parseCommands(const std::string& filename) {
         else if (command == "q") {
             commandVector = splitStr(line, " ");
             if (commandVector.size() < 3 or commandVector.size() > 4) {
-                D(cerr << "invalid command: commandVector.size() not 3 or 4 in: " << line << endl);
+                cout << "Error: invalid command: " << line << endl;
+                cout << "    q command example: q Chat 81\n";
+                cout << "    q command example: q Chat 81 123\n";
                 continue;
             }
 
@@ -144,7 +148,8 @@ void parseCommands(const std::string& filename) {
         else if (command == "p") {
             commandVector = splitStr(line, " ");
             if (commandVector.size() != 3) {
-                D(cerr << "invalid command: commandVector.size() != 3 in: " << line << endl);
+                cout << "Error: invalid command: " << line << endl;
+                cout << "    p command example: p Chat 1\n";
                 continue;
             }
             relationName = commandVector[1];
@@ -154,7 +159,8 @@ void parseCommands(const std::string& filename) {
         else if (command == "c") {
             commandVector = splitStr(line, " ");
             if (commandVector.size() != 2) {
-                D(cerr << "invalid command: commandVector.size() != 2 in: " << line << endl);
+                cout << "Error: invalid command: " << line << endl;
+                cout << "    c command example: c Chat\n";
                 continue;
             }
 
@@ -162,7 +168,7 @@ void parseCommands(const std::string& filename) {
             statisticsRelation(relationName);
         }
         else {
-            D(cerr << "invalid command: " << line << endl);
+            cout << "Error: invalid command: " << line << endl;
         }
     }
 }
